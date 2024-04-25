@@ -11,3 +11,9 @@ export interface IUpdateUserInput {
   membershipTier?: string;
   contactNumber?: string;
 }
+
+export interface ICreateUserProfileInput {
+  dob: string;
+  age: number;
+  role: string;
+}

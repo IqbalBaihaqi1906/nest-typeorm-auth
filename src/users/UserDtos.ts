@@ -39,3 +39,14 @@ export class UpdateUserDto {
   @IsOptional()
   contactNumber?: string;
 }
+
+export class CreateUserProfileDto {
+  @IsNotEmpty()
+  age: number;
+
+  @IsNotEmpty()
+  dob: string;
+
+  @IsIn(['admin', 'user'])
+  role: string;
+}

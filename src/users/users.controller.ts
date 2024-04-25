@@ -11,7 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto } from './UserDtos';
+import { CreateUserDto, CreateUserProfileDto, UpdateUserDto } from './UserDtos';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -62,5 +62,19 @@ export class UsersController {
     const deletedUser = await this.userService.deleteUserById(id);
 
     return deletedUser;
+  }
+
+  @Post(':id/profiles')
+  @UsePipes(new ValidationPipe())
+  async createUserProfile(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() profileData: CreateUserProfileDto,
+  ) {
+    const userProfile = await this.userService.createUserProfile(
+      id,
+      profileData,
+    );
+
+    return userProfile;
   }
 }
