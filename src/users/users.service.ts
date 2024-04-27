@@ -19,7 +19,12 @@ export class UsersService {
   ) {}
 
   async getAllUsers() {
-    const users = await this.userRepository.find();
+    const users = await this.userRepository.find({
+      relations: {
+        profile: true,
+        posts: true,
+      },
+    });
 
     return users;
   }
