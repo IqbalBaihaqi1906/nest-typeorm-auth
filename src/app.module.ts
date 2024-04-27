@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { Profile } from './typeorm/entities/Profile';
 import { PostsModule } from './posts/posts.module';
 import { Post } from './typeorm/entities/Post';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { Post } from './typeorm/entities/Post';
     }),
     UsersModule,
     PostsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [AppService],

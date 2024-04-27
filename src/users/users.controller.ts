@@ -8,18 +8,25 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Req,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateUserDto, CreateUserProfileDto, UpdateUserDto } from './UserDtos';
 import { UsersService } from './users.service';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Request } from 'express';
 
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async getUsers() {
+  async getUsers(@Req() req: Request) {
+    console.log(req.user);
+
     const user = await this.userService.getAllUsers();
 
     return user;

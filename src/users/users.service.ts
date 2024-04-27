@@ -39,6 +39,16 @@ export class UsersService {
     return user;
   }
 
+  async getUserByUsername(username: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        username,
+      },
+    });
+
+    return user;
+  }
+
   async createUser(userData: ICreateUserInput) {
     const hashPassword = bcrypt.hashSync(userData.password, 8);
 
@@ -57,8 +67,6 @@ export class UsersService {
         id,
       },
     });
-
-    console.log('User', user);
 
     if (!user) {
       throw new HttpException('User not found', 404);
